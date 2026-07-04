@@ -3,12 +3,12 @@ server:
   address: 0.0.0.0
 lavalink:
   plugins:
-    # Yeh naya official plugin hai jo YouTube ke signature errors ko bypass karta hai
-    - dependency: "dev.lavalink.youtube:youtube-plugin:1.8.3"
+    # Updated to the latest stable version suggested by your server logs
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.1"
   server:
     password: "youshallnotpass"
     sources:
-      youtube: false # Purane broken source ko band kar diya
+      youtube: false # Keep native disabled as plugin handles it
       bandcamp: true
       soundcloud: true
       twitch: true
@@ -21,13 +21,18 @@ lavalink:
     bufferDurationMs: 400
     frameBufferDurationMs: 5000
 
-# Naye plugin ki configuration jo crash hone se bachaegi
 plugins:
   youtube:
     enabled: true
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
-    # Isme browser user-agent bypass automatic enabled hota hai
+    # Forcing modern native playback signatures to fully bypass the base.js error
+    clients:
+      - MUSIC
+      - ANDROID_VR
+      - WEB
+      - WEB_REMIX
+      - TVHTML5_SIMPLY_EMBEDDED_PLAYER
 
 metrics:
   prometheus:
