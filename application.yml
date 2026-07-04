@@ -2,10 +2,13 @@ server:
   port: 2333
   address: 0.0.0.0
 lavalink:
+  plugins:
+    # Yeh naya official plugin hai jo YouTube ke signature errors ko bypass karta hai
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.8.3"
   server:
     password: "youshallnotpass"
     sources:
-      youtube: true
+      youtube: false # Purane broken source ko band kar diya
       bandcamp: true
       soundcloud: true
       twitch: true
@@ -17,6 +20,15 @@ lavalink:
       equalizer: true
     bufferDurationMs: 400
     frameBufferDurationMs: 5000
+
+# Naye plugin ki configuration jo crash hone se bachaegi
+plugins:
+  youtube:
+    enabled: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    # Isme browser user-agent bypass automatic enabled hota hai
+
 metrics:
   prometheus:
     enabled: false
