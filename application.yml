@@ -1,14 +1,14 @@
 server:
   port: 2333
   address: 0.0.0.0
+
 lavalink:
   plugins:
-    # Updated to the latest stable version suggested by your server logs
     - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.1"
   server:
     password: "youshallnotpass"
     sources:
-      youtube: false # Keep native disabled as plugin handles it
+      youtube: false
       bandcamp: true
       soundcloud: true
       twitch: true
@@ -26,17 +26,21 @@ plugins:
     enabled: true
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
-    # Forcing modern native playback signatures to fully bypass the base.js error
+    # Sirf wahi clients hain jo data-center IPs par block ya captcha nahi maangte
     clients:
       - MUSIC
-      - ANDROID_VR
-      - WEB
-      - WEB_REMIX
+      - ANDROID_MUSIC
       - TVHTML5_SIMPLY_EMBEDDED_PLAYER
+    # Future-proofing against rate limits and bot detection
+    pot:
+      token: "dummy"
+    oauth:
+      enabled: false
 
 metrics:
   prometheus:
     enabled: false
+
 logging:
   level:
     root: INFO
